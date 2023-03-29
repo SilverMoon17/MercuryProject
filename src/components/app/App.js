@@ -10,6 +10,7 @@ import Register from "../pages/Register/Register";
 import Ideas from "../pages/Ideas/Ideas";
 import Store from "../pages/Store/Store";
 import IdeaCreating from "../pages/IdeaCreate/IdeaCreating";
+pureFinalPropsSelectorFactory("sasat")
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
