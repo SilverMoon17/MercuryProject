@@ -1,10 +1,7 @@
 import { useState } from 'react';
-import { Container } from 'react-bootstrap';
-import { Row } from 'react-bootstrap';
-import { Col } from 'react-bootstrap';
-import { Alert } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Container, Row, Col, Alert } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux'; 
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -20,6 +17,13 @@ export default function Login() {
     const [errorDescription, setErrorDescription] = useState('')
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const login = (role, id) => {
+        dispatch({type:"RoleState", payload: role})
+        dispatch({type:"IdState", payload: id})
+        dispatch({type:"AuthState", payload: true})
+    }
 
     const schema = yup.object().shape({
         email: yup.string().email('Invalid e-mail').required('E-mail is reuqired'),
@@ -42,24 +46,32 @@ export default function Login() {
                             }
                             let res = await axiosInstance.post('/auth/login', data)
                                 .catch((error) => {
-                                    console.log(error)
                                     setError(true)
-                                    setErrorDescription(error.response.data.errors['Auth.InvalidCredentials'])
+                                    if (error.response) {
+                                        let firstError = Object.values(error.response.data.errors)[0];
+                                        setErrorDescription(firstError[0])
+                                    } else {
+                                        setErrorDescription(error.message)
+                                    }
+                                    
+                                   
                                 })
                             if (res && values.remember) {
                                 localStorage.setItem("token", res.data.token)
                                 localStorage.setItem("id", res.data.id)
                                 localStorage.setItem("username", res.data.username)
+                                login(res.data.role, res.data.id)
                                 axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`
                                 navigate('/')
-                                window.location.reload();
+                                // window.location.reload();
                             } else if (res) {
                                 sessionStorage.setItem("token", res.data.token)
                                 sessionStorage.setItem("id", res.data.id)
                                 sessionStorage.setItem("username", res.data.username)
+                                login(res.data.role, res.data.id)
                                 axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`
                                 navigate('/')
-                                window.location.reload();
+                                // window.location.reload();
                             }
                         }}
                         initialValues={{
