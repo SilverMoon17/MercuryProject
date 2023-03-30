@@ -60,6 +60,7 @@ export default function Login() {
                                 localStorage.setItem("token", res.data.token)
                                 localStorage.setItem("id", res.data.id)
                                 localStorage.setItem("username", res.data.username)
+                                localStorage.setItem("role", res.data.role)
                                 login(res.data.role, res.data.id)
                                 axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`
                                 navigate('/')
@@ -68,6 +69,7 @@ export default function Login() {
                                 sessionStorage.setItem("token", res.data.token)
                                 sessionStorage.setItem("id", res.data.id)
                                 sessionStorage.setItem("username", res.data.username)
+                                sessionStorage.setItem("role", res.data.role)
                                 login(res.data.role, res.data.id)
                                 axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`
                                 navigate('/')

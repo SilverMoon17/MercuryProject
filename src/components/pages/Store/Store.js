@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
 
 function Store() {
-    const role = useSelector(state => state.Role);
+    const role = localStorage.getItem("role") || sessionStorage.getItem("role");
     const [scrollPosition, setScrollPosition] = useState(0);
     const [isDisabled, setDisabled] = useState("hidden");
     const handleScroll = () => {

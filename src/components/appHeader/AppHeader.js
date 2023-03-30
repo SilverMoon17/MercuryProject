@@ -42,7 +42,7 @@ function AppHeader()  {
         window.location.reload();
     }
 
-    const auth = isLogged ? 
+    const auth = localStorage.getItem("token") ||sessionStorage.getItem("token") ? 
                 <div className="d-flex">
                     <Link to={role === "Admin" ? '/adminPanel' : '/'} className="nav-link">{localStorage.getItem("username") || sessionStorage.getItem("username")}</Link>
                     <button onClick={() => {logOut()}} className="nav-link log-out">Log out</button>

@@ -9,7 +9,7 @@ import './index.css';
 
 const defaultState  = {
   Id: null,
-  Role: 'guest',
+  Role: "Guest",
   isLogged: false
 }
 
