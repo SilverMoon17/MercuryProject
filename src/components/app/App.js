@@ -10,13 +10,16 @@ import Register from "../pages/Register/Register";
 import Ideas from "../pages/Ideas/Ideas";
 import Store from "../pages/Store/Store";
 import IdeaCreating from "../pages/IdeaCreate/IdeaCreating";
+import ReviewIdeas from "../pages/ReviewIdeas/ReviewIdeas";
+import PageOfIdea from "../pages/PageOfIdea/PageOfIdea";
+import Panel from "../pages/AdminPanel/Panel";
+import ApprovedIdeas from "../pages/ApprovedIdeas/ApprovedIdeas";
+import Projects from "../pages/Projects/Projects";
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import background from '../../resources/background.jpg';
-import PageOfIdea from "../pages/PageOfIdea/PageOfIdea";
-import Panel from "../pages/AdminPanel/Panel";
 import { Cart } from "../pages/cart";
 import { ProfilePage } from "../pages/profile";
 
@@ -29,8 +32,10 @@ function App() {
         <img src={background} alt="" className="bg-img" />
         <Routes>
           <Route path="/" element={<Home />}/>
-          <Route path="/projects" element={<h1>Projects</h1>}/>
-          <Route path="/ideas" element={<Ideas/>}/>
+          <Route path="/projects" element={<Projects/>}/>
+          <Route path="/ideas/approved" element={<ApprovedIdeas/>}/>
+          <Route path="/ideas/review" element={<ReviewIdeas/>}/>
+          <Route path="/idea/:id" element={<PageOfIdea/>}/>
           <Route path="/store" element={<Store/>}/>
           <Route path="/product/:id" element={<Product />}/>
           <Route path="/PageOfIdea" element={<PageOfIdea/>}/>
@@ -41,6 +46,7 @@ function App() {
           <Route path="/adminPanel" element={<Panel/>}/>
           <Route path="/cart" element={<Cart/>}/>
           <Route path="/profile" element={<ProfilePage/>}/>
+          {/* <Route path="/test" element={<Test/>}/> */}
         </Routes>
         <footer className="footer">
           <AppFooter/>

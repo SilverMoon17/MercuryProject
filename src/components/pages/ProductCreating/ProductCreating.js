@@ -124,7 +124,7 @@ export default function ProductCreating(props) {
 			"category": values.category,
 			"iconUrl": values.iconUrl
 		}
-		await axiosInstance.post('/admin/product', data)
+		await axiosInstance.post('/product', data)
 			.then(() => {
 				setError(false);
 				setShowModal(true);	
@@ -141,7 +141,7 @@ export default function ProductCreating(props) {
 			<Row>
 				<Col md={12}>
 					{error && <ErrorModal message={errorMessage} error = {error} setError = {setError}/>}
-					<SuccessModal showModal = {showModal} setShowModal = {setShowModal}/>
+					<SuccessModal showModal = {showModal} setShowModal = {setShowModal} message="Product added successfully!"/>
 					<img src={logo} alt="logo" className='logo-product-creating' width={306} />
 					<div className="product-creating-block d-flex justify-content-between">
 						<div className="product-image-upload">
