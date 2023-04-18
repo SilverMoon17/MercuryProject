@@ -16,11 +16,14 @@ import Panel from "../pages/AdminPanel/Panel";
 import ApprovedIdeas from "../pages/ApprovedIdeas/ApprovedIdeas";
 import Projects from "../pages/Projects/Projects";
 
+
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import background from '../../resources/background.jpg';
-import { Cart } from "../pages/cart";
+import PageOfIdea from "../pages/PageOfIdea/PageOfIdea";
+import Panel from "../pages/AdminPanel/Panel";
+import  Cart  from "../pages/cart";
 import { ProfilePage } from "../pages/profile";
 
 
