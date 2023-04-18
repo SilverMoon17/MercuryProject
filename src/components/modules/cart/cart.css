@@ -12,13 +12,18 @@
     height: 120px;
 }
 .menu {
-    background-color: lightgrey;
+    background-color: white;
     margin: 10px 15px;
     height: 500px;
+    border:1px solid grey;
+    border-radius: 7px;
 }
 .content {
     margin: 10px 15px;
-    background-color: lightgrey;
+    background-color: white;
+    border:1px solid grey;
+    border-radius: 7px;
+
 }
 .cartImage {
     margin: 15px 0 0  0;
@@ -26,3 +31,4 @@
     width: 125px;
     height: 125px;
 }
+

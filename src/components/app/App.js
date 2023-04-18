@@ -10,7 +10,7 @@ import Register from "../pages/Register/Register";
 import Ideas from "../pages/Ideas/Ideas";
 import Store from "../pages/Store/Store";
 import IdeaCreating from "../pages/IdeaCreate/IdeaCreating";
-pureFinalPropsSelectorFactory("sasat")
+
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,7 +18,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import background from '../../resources/background.jpg';
 import PageOfIdea from "../pages/PageOfIdea/PageOfIdea";
 import Panel from "../pages/AdminPanel/Panel";
-import { Cart } from "../pages/cart";
+import  Cart  from "../pages/cart";
 import { ProfilePage } from "../pages/profile";
 
 
