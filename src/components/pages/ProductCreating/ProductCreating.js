@@ -124,12 +124,13 @@ export default function ProductCreating(props) {
 			"category": values.category,
 			"iconUrl": values.iconUrl
 		}
-		await axiosInstance.post('/admin/createProduct', data)
+		await axiosInstance.post('/product', data)
 			.then(() => {
 				setError(false);
 				setShowModal(true);	
 			})
 			.catch((error) => {
+				console.log(error);
 				setErrorMessage(error.response.data.title ? error.response.data.title : error.message);
 				setError(true)
 			});
@@ -140,7 +141,7 @@ export default function ProductCreating(props) {
 			<Row>
 				<Col md={12}>
 					{error && <ErrorModal message={errorMessage} error = {error} setError = {setError}/>}
-					<SuccessModal showModal = {showModal} setShowModal = {setShowModal}/>
+					<SuccessModal showModal = {showModal} setShowModal = {setShowModal} message="Product added successfully!"/>
 					<img src={logo} alt="logo" className='logo-product-creating' width={306} />
 					<div className="product-creating-block d-flex justify-content-between">
 						<div className="product-image-upload">
@@ -260,6 +261,8 @@ export default function ProductCreating(props) {
 													<option>T-Shirt</option>
 													<option>Mug</option>
 													<option>Backpack</option>
+													<option>Hoodie</option>
+													<option>Other</option>
 												</Form.Select>
 												<Form.Control.Feedback type="invalid">
 													{errors.category}

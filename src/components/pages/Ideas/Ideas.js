@@ -8,14 +8,27 @@ import { Link } from "react-router-dom";
 
 import logo from "../../../resources/logo(black).svg";
 import Idea from "./Idea";
+import ErrorModal from "../../errorModal/ErrorModal";
+import Spinner from "../../spinner/Spinner";
 import './Ideas.css';
 
-export default function Ideas() {
+export default function Ideas(
+        {
+            ideasList, 
+            loading, 
+            error,
+            setError,
+            errorMessage,
+        }
+    ) {
     const [scrollPosition, setScrollPosition] = useState(0);
     const [isDisabled, setDisabled] = useState("hidden");
     const handleScroll = () => {
-        const position = window.pageYOffset;      
-        if(position > 500 && position < 1300) {
+        const position = window.pageYOffset; 
+        const bodyHeight = document.body.scrollHeight;   
+        console.log(`bodyHeight-700 ${bodyHeight-700}`, `Position ${position}`);
+        console.log(position > 450 && position < bodyHeight - 450);
+        if(position > 450 && position < bodyHeight - 450) {
             setDisabled("visible")
         } else {
             setDisabled("hidden")
@@ -29,11 +42,36 @@ export default function Ideas() {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, []);
+    }, [ideasList]);
+
+    function renderList(arr) {
+        const items = arr.map(idea => {
+            const {id, title, description, status, goal, collected, category, ideaImageUrls } = idea
+            return (
+                <Idea 
+                    key = {id.value} 
+                    id = {id.value}
+                    title = {title} 
+                    description={description}
+                    status = {status}
+                    goal = {goal}
+                    collected = {collected} 
+                    category = {category} 
+                    imageUrls = {ideaImageUrls}
+                />
+            )
+        })
+        return {items}
+    }
+
+    const {items} = renderList(ideasList);
+    const errorModal = error ? <ErrorModal message={errorMessage} error={error} setError = {setError}/> : null;
+    const spinner = loading ? <Spinner/> : null;
+    const content = !(loading || error) ? items.length === 0 ? <h3 className="idea-title">List is empty</h3> : items : null;
 
     return (
         <>
-            <Link to='/ideaCreating' className={isDisabled}><Button variant="custom-button button-absolute" size="lg" style={{color: "#fff"}}>Create new idea</Button></Link>
+            <Link to='/ideaCreating' className={isDisabled}><Button variant="custom-button button-absolute" size="lg" style={{color: "#fff", zIndex: "99"}}>Create new idea</Button></Link>
             <Container>
                 <Row>
                     <Col md={4} sm={8} className="ideas-logo-block d-flex align-items-center">
@@ -53,14 +91,16 @@ export default function Ideas() {
                                 </Form.Select>
                                 <button className='search-button'>Search</button>
                             </div>
-                        </form>
+                        </form> 
                     </Col>
                 </Row>
                 <Row>
                     <Col md={12}>
-                        <Idea />
-                        <Idea />
-                        <Idea />
+                        <ul>
+                            {errorModal}
+                            {spinner}
+                            {content} 
+                        </ul>
                     </Col>
                 </Row>
             </Container>
