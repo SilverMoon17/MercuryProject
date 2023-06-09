@@ -8,6 +8,7 @@ import AuthButtons from './AuthButtons';
 
 
 import logo from '../../resources/logo(white).svg';
+import cart_icon from '../../resources/cart-fill.svg'
 import './AppHeader.css';
 
 
@@ -32,19 +33,23 @@ function AppHeader()  {
             localStorage.removeItem("id")
             localStorage.removeItem("username")
             localStorage.removeItem("token")
+            localStorage.removeItem("role")
         }
         if(sessionStorage.getItem("id") && sessionStorage.getItem("username") && sessionStorage.getItem("token"))
         {
             sessionStorage.removeItem("id")
             sessionStorage.removeItem("username")
             sessionStorage.removeItem("token")
-        }
-        window.location.reload();
-    }
+            sessionStorage.removeItem("role")
 
+        }
+        window.location.replace("/");
+    }
+    console.log(role);
     const auth = localStorage.getItem("token") ||sessionStorage.getItem("token") ? 
-                <div className="d-flex">
-                    <Link to={role === "Admin" ? '/adminPanel' : '/'} className="nav-link">{localStorage.getItem("username") || sessionStorage.getItem("username")}</Link>
+                <div className="d-flex align-items-center">
+                    <Link to="/cart"><img src={cart_icon} alt="cart_icon" /></Link>
+                    <Link to={role === "Admin" || role === "Developer" ? '/adminPanel' : `/profile/${localStorage.getItem("id") || sessionStorage.getItem("id")}`} className="nav-link">{localStorage.getItem("username") || sessionStorage.getItem("username")}</Link>
                     <button onClick={() => {logOut()}} className="nav-link log-out">Log out</button>
                 </div>
                 :
